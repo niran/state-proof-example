@@ -8,7 +8,11 @@ There are two types of proofs that we handle:
 * Merkle proofs from the L1 **block hash**
 * Merkle proofs from the L1 **beacon root**, provided by EIP-4788
 
-Note that beacon root proofs are only usable on L2 chains that support EIP-4788, like OP Stack rollups. You also need a beacon node to generate the proofs, and public beacon nodes are hard to find.
+Both kinds of proofs can be tricky to work with.
+
+Block hash proofs are the most widely supported across rollups and alt-L1 chains, but they need to be submitted to the L2 chain during the short period when it matches the L2's value for the L1 block hash. Alternatively, you could store the latest L1 block hash in your own contract on L2, then prove against that block at your own leisure.
+
+Beacon root proofs can rely on the buffer of the most recent 8191 beacon roots (about one day), so you don't have to store your own roots or race to get your proof in. However, beacon root proofs are only usable on L2 chains that support EIP-4788, like OP Stack rollups. You also need a beacon node to generate the proofs, and public beacon nodes are hard to find.
 
 # Generating Proofs
 
